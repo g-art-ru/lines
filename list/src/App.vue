@@ -8,6 +8,7 @@
 <script>
 import LineView from './components/LineView.vue'
 import LineAdd from './components/LineAdd.vue'
+import axios from 'axios'
 
 
 export default {
@@ -18,7 +19,15 @@ export default {
    },
    methods:{
       AddLines(data){
-        console.log(data.lines);
+        
+        var mas = [];
+        mas = data.lines.split(/\r?\n/);
+        mas.forEach((el) => {
+          console.log(el);
+        })
+        axios.get("localhost:2525/words").then((response)=>{
+          console.log('Done' + response.data);
+        })
       },
       Update(){
         console.log("update position");
