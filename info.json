@@ -1,0 +1,22 @@
+{
+  "words": [
+    {
+      "word": "Слово 1",
+      "yandex": 1,
+      "google": 1,
+      "hide": 0
+    },
+    {
+      "word": "Слово 2",
+      "yandex": 1,
+      "google": 1,
+      "hide": 0
+    },
+    {
+      "word": "Слово 3",
+      "yandex": 1,
+      "google": 1,
+      "hide": 0
+    }
+  ]
+}
