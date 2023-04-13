@@ -34,6 +34,23 @@ export default {
         })
    },
    methods:{
+      removeLineWithId(id) {
+        const objWithIdIndex = this.lines.findIndex((obj) => obj.id === id);
+
+        if (objWithIdIndex > -1) {
+          this.lines.splice(objWithIdIndex, 1);
+        }
+      },
+      hideLineWithId(id){
+        var fl;
+        const objWithIdIndex = this.lines.findIndex((obj) => obj.id === id);
+        if (objWithIdIndex > -1) {
+          if(this.lines[objWithIdIndex].hide==0){fl = 1;}else{fl = 0;}
+          this.lines[objWithIdIndex].hide = fl;
+         
+        }
+        return fl;
+      },
       AddLines(data){
         
         var mas = [];
@@ -62,15 +79,28 @@ export default {
         console.log("update position");
       },
       Delete(id){
-        console.log("Delete position" + id);
         axios.delete("http://localhost:2525/words/" + id).then((response)=>{
             console.log('Done' + response.data);
         }).catch((error) => {
             console.log(error);
         });
+        console.log("Delete position" + id);
+        this.removeLineWithId(id);
+        
       },
-      Hide(){
-        console.log("Hide position");
+      Hide(id){
+        
+        let dt = {
+          hide: this.hideLineWithId(id),
+        };
+        
+        axios.patch("http://localhost:2525/words/" + id, dt).then((response)=>{
+            console.log('Done' + response.data);
+        }).catch((error) => {
+            console.log(error);
+        });
+        
+        
       }
    }
    
