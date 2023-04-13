@@ -13,7 +13,7 @@
       <div class="button-group" role="group">
         <button type="button" class="btn btn-primary" @click="$emit('update')" alt="Обновить"><i class="bi bi-arrow-clockwise"></i></button>
         <button type="button" class="btn btn-warning" @click="$emit('hide')"  alt="Скрыть"><i class="bi bi-eye-slash"></i></button>
-        <button type="button" class="btn btn-danger" @click="$emit('delete')" alt="Удалить"><i class="bi bi-trash3"></i></button>
+        <button type="button" class="btn btn-danger" @click="$emit('delete', msg.id)" alt="Удалить"><i class="bi bi-trash3"></i></button>
       </div>
     </div>
   </div>

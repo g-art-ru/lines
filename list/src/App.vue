@@ -17,28 +17,6 @@ export default {
     LineView,
     LineAdd
    },
-   methods:{
-      AddLines(data){
-        
-        var mas = [];
-        mas = data.lines.split(/\r?\n/);
-        mas.forEach((el) => {
-          console.log(el);
-        })
-        axios.get("localhost:2525/words").then((response)=>{
-          console.log('Done' + response.data);
-        })
-      },
-      Update(){
-        console.log("update position");
-      },
-      Delete(){
-        console.log("Delete position");
-      },
-      Hide(){
-        console.log("Hide position");
-      }
-   },
    data(){
     return {
       lines: [
@@ -47,7 +25,55 @@ export default {
         {word: 'слово 3', yandex: '3', google: '222'}
       ]
     }
+   },
+   created(){
+    console.log("d");
+    axios.get("http://localhost:2525/words").then((response)=>{
+          console.log('Done' + response.data);
+          this.lines = response.data;
+        })
+   },
+   methods:{
+      AddLines(data){
+        
+        var mas = [];
+        mas = data.lines.split(/\r?\n/);
+        mas.forEach((el) => {
+          
+          let dt = {
+            word: el,
+            yandex: 1,
+            google: 1,
+            hide: 0
+          }
+          axios.post("http://localhost:2525/words", dt).then((response)=>{
+            console.log('Done' + response.data);
+          }).catch((error) => {
+            console.log(error);
+          });
+          this.lines.push(dt);
+          
+
+        })
+        
+       
+      },
+      Update(){
+        console.log("update position");
+      },
+      Delete(id){
+        console.log("Delete position" + id);
+        axios.delete("http://localhost:2525/words/" + id).then((response)=>{
+            console.log('Done' + response.data);
+        }).catch((error) => {
+            console.log(error);
+        });
+      },
+      Hide(){
+        console.log("Hide position");
+      }
    }
+   
 }
 </script>
 
